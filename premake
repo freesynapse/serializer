@@ -1,0 +1,23 @@
+#!/bin/bash
+
+if [ $1 = "debug" ]; then 
+    ./premake5/premake5 --cc=clang --verbose gmake2
+    cd build
+    make config=debug
+    cd ..
+elif [ $1 = "release" ]; then
+    ./premake5/premake5 --cc=clang --verbose gmake2
+    cd build
+    make config=release
+    cd ..
+elif [ $1 = "clean" ]; then
+    rm -r ./build/obj
+    rm ./build/*.make
+    rm ./build/Makefile
+else
+    echo "Usage: premake <debug|release|clean>"
+fi
+
+
+
+
