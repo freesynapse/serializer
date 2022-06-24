@@ -1,4 +1,4 @@
-workspace "serializer_v3"
+workspace "serializer"
 
     location "build"
     
@@ -21,7 +21,7 @@ workspace "serializer_v3"
     filter { }
 
 
-    project "serializer_v3"
+    project "serializer"
 
     -- architecture: 'x86' or 'x86_64'
     architecture "x86_64"

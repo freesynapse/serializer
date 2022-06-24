@@ -7,19 +7,19 @@
 
 namespace BIOPAC
 {
-    void Selector::init()
+    void Selector::init(Syn::Serializer* _serializer_ptr)
     {
-        Serializer::register_object(&Selector::serialize, &Selector::deserialize);
+        _serializer_ptr->registerObject(&Selector::serialize, &Selector::deserialize);
 
     }
     //
-    void Selector::serialize()
+    void Selector::serialize(Syn::Serializer* _serializer_ptr)
     {
         printf("%s called.\n", __PRETTY_FUNCTION__);
         
     }
     //
-    void Selector::deserialize()
+    void Selector::deserialize(Syn::Serializer* _serializer_ptr)
     {
         printf("%s called.\n", __PRETTY_FUNCTION__);
     }

@@ -15,16 +15,16 @@ int main(int argc, char* argv[])
 {
     size_t sz;
     
-    State::init();
-    //Selector::init();
+    Syn::Serializer serializer(1024);
 
-    Serializer::init();
+    State::init(&serializer);
+    //Selector::init();
     
-    sz = Serializer::serialize("test.acqs");
+    sz = serializer.serialize("test.acqs");
     State::print();
 
     State::clear();
-    sz = Serializer::deserialize("test.acqs");
+    sz = serializer.deserialize("test.acqs");
     State::print();
 
     return 0;

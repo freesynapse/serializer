@@ -3,17 +3,19 @@
 
 #include <string>
 
+#include "Serializer.h"
+
 
 namespace BIOPAC
 {
     class State
     {
     public:
-        static void init();
+        static void init(Syn::Serializer* _serializer_ptr);
         static void print();
         static void clear();
-        static void serialize();
-        static void deserialize();
+        static void serialize(Syn::Serializer* _serializer_ptr);
+        static void deserialize(Syn::Serializer* _serializer_ptr);
 
     public:
         static int         acq_filename_sz;

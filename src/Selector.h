@@ -3,6 +3,8 @@
 
 #include <map>
 
+#include "Serializer.h"
+
 
 namespace BIOPAC
 {
@@ -19,10 +21,10 @@ namespace BIOPAC
     class Selector
     {
     public:
-        static void init();
+        static void init(Syn::Serializer* _serializer_ptr);
 
-        static void serialize();
-        static void deserialize();
+        static void serialize(Syn::Serializer* _serializer_ptr);
+        static void deserialize(Syn::Serializer* _serializer_ptr);
 
     public:
         static std::map<int, Selection> s_selections;

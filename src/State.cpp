@@ -18,10 +18,9 @@ namespace BIOPAC
     uint32_t    State::action_GUI                = 3;
 
     //
-    void State::init()
+    void State::init(Syn::Serializer* _serializer_ptr)
     {
-        Serializer::register_object(&serialize, &deserialize);
-
+        _serializer_ptr->registerObject(&serialize, &deserialize);
     }
     //
     void State::print()
@@ -53,7 +52,7 @@ namespace BIOPAC
         action_GUI                = 3;        
     }
     //
-    void State::serialize()
+    void State::serialize(Syn::Serializer* _serializer_ptr)
     {
         printf("%s called.\n", __PRETTY_FUNCTION__);
         
@@ -63,87 +62,48 @@ namespace BIOPAC
         int status_message_sz = status_message.size();
         int error_message_sz = error_message.size();
 
-        //char* ptr = *_buffer;
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(acq_filename_sz),           sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, (char*)acq_filename.c_str(),  acq_filename_sz   );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(save_filename_sz),          sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, (char*)save_filename.c_str(), save_filename_sz  );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(load_filename_sz),          sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, (char*)load_filename.c_str(), load_filename_sz  );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(visibility_state),          sizeof(uint64_t)  );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(prev_visibility_state),     sizeof(uint64_t)  );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(status_message_sz),         sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, (char*)status_message.c_str(), status_message_sz);
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(error_message_sz),          sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, (char*)error_message.c_str(), error_message_sz  );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(mode),                      sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(action),                    sizeof(int)       );
-        //bytes += Serializer::copy_to_buffer ( &ptr, &(action_GUI),                sizeof(uint32_t)  );
-        Serializer::to_buffer(&acq_filename_sz);
-        Serializer::to_buffer(acq_filename, acq_filename_sz);
-        Serializer::to_buffer(&save_filename_sz);
-        Serializer::to_buffer(save_filename, save_filename_sz);
-        Serializer::to_buffer(&load_filename_sz);
-        Serializer::to_buffer(load_filename, load_filename_sz);
-        Serializer::to_buffer(&visibility_state);
-        Serializer::to_buffer(&prev_visibility_state);
-        Serializer::to_buffer(&status_message_sz);
-        Serializer::to_buffer(status_message, status_message_sz);
-        Serializer::to_buffer(&error_message_sz);
-        Serializer::to_buffer(error_message, error_message_sz);
-        Serializer::to_buffer(&mode);
-        Serializer::to_buffer(&action);
-        Serializer::to_buffer(&action_GUI);
+        _serializer_ptr->to_buffer(&acq_filename_sz);
+        _serializer_ptr->to_buffer(acq_filename, acq_filename_sz);
+        _serializer_ptr->to_buffer(&save_filename_sz);
+        _serializer_ptr->to_buffer(save_filename, save_filename_sz);
+        _serializer_ptr->to_buffer(&load_filename_sz);
+        _serializer_ptr->to_buffer(load_filename, load_filename_sz);
+        _serializer_ptr->to_buffer(&visibility_state);
+        _serializer_ptr->to_buffer(&prev_visibility_state);
+        _serializer_ptr->to_buffer(&status_message_sz);
+        _serializer_ptr->to_buffer(status_message, status_message_sz);
+        _serializer_ptr->to_buffer(&error_message_sz);
+        _serializer_ptr->to_buffer(error_message, error_message_sz);
+        _serializer_ptr->to_buffer(&mode);
+        _serializer_ptr->to_buffer(&action);
+        _serializer_ptr->to_buffer(&action_GUI);
         
         //return bytes;
     }
     //
-    void State::deserialize()
+    void State::deserialize(Syn::Serializer* _serializer_ptr)
     {
         //size_t bytes = 0;
         int acq_filename_sz, save_filename_sz, load_filename_sz, status_message_sz, error_message_sz;
         
         printf("%s called.\n", __PRETTY_FUNCTION__);
 
-        Serializer::from_buffer(&acq_filename_sz);
-        Serializer::from_buffer(&acq_filename, acq_filename_sz);
-        Serializer::from_buffer(&save_filename_sz);
-        Serializer::from_buffer(&save_filename, save_filename_sz);
-        Serializer::from_buffer(&load_filename_sz);
-        Serializer::from_buffer(&load_filename, load_filename_sz);
-        Serializer::from_buffer(&visibility_state);
-        Serializer::from_buffer(&prev_visibility_state);
-        Serializer::from_buffer(&status_message_sz);
-        Serializer::from_buffer(&status_message, status_message_sz);
-        Serializer::from_buffer(&error_message_sz);
-        Serializer::from_buffer(&error_message, error_message_sz);
-        Serializer::from_buffer(&(mode));
-        Serializer::from_buffer(&(action));
-        Serializer::from_buffer(&(action_GUI));
+        _serializer_ptr->from_buffer(&acq_filename_sz);
+        _serializer_ptr->from_buffer(&acq_filename, acq_filename_sz);
+        _serializer_ptr->from_buffer(&save_filename_sz);
+        _serializer_ptr->from_buffer(&save_filename, save_filename_sz);
+        _serializer_ptr->from_buffer(&load_filename_sz);
+        _serializer_ptr->from_buffer(&load_filename, load_filename_sz);
+        _serializer_ptr->from_buffer(&visibility_state);
+        _serializer_ptr->from_buffer(&prev_visibility_state);
+        _serializer_ptr->from_buffer(&status_message_sz);
+        _serializer_ptr->from_buffer(&status_message, status_message_sz);
+        _serializer_ptr->from_buffer(&error_message_sz);
+        _serializer_ptr->from_buffer(&error_message, error_message_sz);
+        _serializer_ptr->from_buffer(&(mode));
+        _serializer_ptr->from_buffer(&(action));
+        _serializer_ptr->from_buffer(&(action_GUI));
 
-
-        /*
-        int acq_filename_sz, save_filename_sz, load_filename_sz, status_message_sz, error_message_sz;
-        
-        char* ptr = *_buffer;
-        bytes += Serializer::copy_from_buffer        ( &(acq_filename_sz),       &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer_char   ( &(acq_filename),          &ptr, acq_filename_sz  );
-        bytes += Serializer::copy_from_buffer        ( &(save_filename_sz),      &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer_char   ( &(save_filename),         &ptr, save_filename_sz );
-        bytes += Serializer::copy_from_buffer        ( &(load_filename_sz),      &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer_char   ( &(load_filename),         &ptr, load_filename_sz );
-        bytes += Serializer::copy_from_buffer        ( &(visibility_state),      &ptr, sizeof(uint64_t) );
-        bytes += Serializer::copy_from_buffer        ( &(prev_visibility_state), &ptr, sizeof(uint64_t) );
-        bytes += Serializer::copy_from_buffer        ( &(status_message_sz),     &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer_char   ( &(status_message),        &ptr, status_message_sz);
-        bytes += Serializer::copy_from_buffer        ( &(error_message_sz),      &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer_char   ( &(error_message),         &ptr, error_message_sz );
-        bytes += Serializer::copy_from_buffer        ( &(mode),                  &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer        ( &(action),                &ptr, sizeof(int)      );
-        bytes += Serializer::copy_from_buffer        ( &(action_GUI),            &ptr, sizeof(uint32_t) );
-
-        return bytes;
-        */
     }
 
 }
