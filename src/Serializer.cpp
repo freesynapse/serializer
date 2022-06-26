@@ -88,14 +88,16 @@ namespace Syn
         size_t bytes_read = fread(m_buffer, 1, file_size, input_file_ptr);
 
         // check file type
-        char* aqcs_id = new char[ACQS_IDENTIFIER_SIZE];
+        char* aqcs_id = new char[ACQS_IDENTIFIER_SIZE + 1];
         memcpy(aqcs_id, m_buffer, ACQS_IDENTIFIER_SIZE);
+        aqcs_id[ACQS_IDENTIFIER_SIZE] = 0;
         m_bufferPtr += ACQS_IDENTIFIER_SIZE;
         if (strcmp(aqcs_id, ACQS_IDENTIFIER) != 0) 
         { 
             SYN_CORE_TRACE("ERROR : invalid file identifier\n");
             return 0;
         }
+        printf("AQCS file identifier : %s\n", aqcs_id);
         delete[] aqcs_id;
 
         // deserialize all registered objects
