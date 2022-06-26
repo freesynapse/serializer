@@ -97,7 +97,7 @@ namespace Syn
             SYN_CORE_TRACE("ERROR : invalid file identifier\n");
             return 0;
         }
-        printf("AQCS file identifier : %s\n", aqcs_id);
+        printf("File identifier : '%s'\n", aqcs_id);
         delete[] aqcs_id;
 
         // deserialize all registered objects

@@ -21,6 +21,7 @@
 #define ASSERT_FILE_PTR(ptr, msg) if (!ptr) { printf("ERROR: %s.\n", msg); return 0; }
 #define SYN_CORE_TRACE printf
 
+
 namespace Syn
 {
     class Serializer
@@ -45,6 +46,14 @@ namespace Syn
             memcpy(m_bufferPtr, _src, sizeof(decltype(*_src)));
             m_bufferPtr += sizeof(decltype(*_src));
         }
+        /*
+        template<typename T, typename S>
+        inline __attribute__ ((always_inline)) void to_buffer(std::vector<T>* _src)
+        {
+            memcpy(m_bufferPtr, _src, sizeof(std::vector<T>));
+            m_bufferPtr += sizeof(std::vector<T>);
+        }
+        */
         /* Overloads for string types. */
         inline __attribute__ ((always_inline)) void to_buffer(const std::string& _src, size_t _n)
         {

@@ -21,10 +21,11 @@ namespace BIOPAC
     void Selector::print()
     {
         printf("Selector : %zu Selection(s)\n", s_selections.size());
+        int i = 0;
         for (const auto& sel : s_selections)
         {
             auto s = sel.second;
-            printf("\t(%2d, %2d) : %f\n", s.m_vec.x, s.m_vec.y, s.m_double);
+            printf("\t%2d : (%2d, %2d) : %f\n", i++, s.m_vec.x, s.m_vec.y, s.m_double);
         }
     }
     //

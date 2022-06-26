@@ -26,13 +26,13 @@ namespace BIOPAC
     void State::print()
     {
         printf("State:\n");
-        printf("%-32s : %s\n", "acq_filename", acq_filename.c_str());
-        printf("%-32s : %s\n", "save_filename", save_filename.c_str());
-        printf("%-32s : %s\n", "load_filename", load_filename.c_str());
+        printf("%-32s : '%s'\n", "acq_filename", acq_filename.c_str());
+        printf("%-32s : '%s'\n", "save_filename", save_filename.c_str());
+        printf("%-32s : '%s'\n", "load_filename", load_filename.c_str());
         printf("%-32s : %lu\n", "visibility_state", visibility_state);
         printf("%-32s : %lu\n", "prev_visibility_state", prev_visibility_state);
-        printf("%-32s : %s\n", "status_message", status_message.c_str());
-        printf("%-32s : %s\n", "error_message", error_message.c_str());
+        printf("%-32s : '%s'\n", "status_message", status_message.c_str());
+        printf("%-32s : '%s'\n", "error_message", error_message.c_str());
         printf("%-32s : %d\n", "mode", mode);
         printf("%-32s : %d\n", "action", action);
         printf("%-32s : %d\n", "action_GUI", action_GUI);        
@@ -40,16 +40,16 @@ namespace BIOPAC
     //
     void State::clear()
     {
-        acq_filename              = "test.acq";
-        save_filename             = "save.acqs";
-        load_filename             = "load.acqs";
-        visibility_state          = 1;
-        prev_visibility_state     = 1;
-        status_message            = "example message";
-        error_message             = "example error";
-        mode                      = 1;
-        action                    = 2;
-        action_GUI                = 3;        
+        acq_filename              = "";
+        save_filename             = "";
+        load_filename             = "";
+        visibility_state          = 0;
+        prev_visibility_state     = 0;
+        status_message            = "";
+        error_message             = "";
+        mode                      = 0;
+        action                    = 0;
+        action_GUI                = 0;        
     }
     //
     void State::serialize(Syn::Serializer* _serializer_ptr)
