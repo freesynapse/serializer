@@ -15,7 +15,7 @@ int main(int argc, char* argv[])
 {
     size_t sz;
     
-    Syn::Serializer serializer(1024);
+    Syn::Serializer serializer;
 
     State::init(&serializer);
     Selector::init(&serializer);
