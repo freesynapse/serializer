@@ -40,26 +40,37 @@ namespace Syn
 
     public:
         /* The type (and hence the size) is deduced. */
-        template<typename T>
+        template<typename T>    // ptr
         inline __attribute__ ((always_inline)) void to_buffer(T* _src)
         {
             memcpy(m_bufferPtr, _src, sizeof(decltype(*_src)));
             m_bufferPtr += sizeof(decltype(*_src));
         }
-        /*
-        template<typename T, typename S>
-        inline __attribute__ ((always_inline)) void to_buffer(std::vector<T>* _src)
+        template<typename T>    // lvalue reference
+        inline __attribute__ ((always_inline)) void to_buffer(const T& _src)
         {
-            memcpy(m_bufferPtr, _src, sizeof(std::vector<T>));
-            m_bufferPtr += sizeof(std::vector<T>);
+            memcpy(m_bufferPtr, &_src, sizeof(decltype(_src)));
+            m_bufferPtr += sizeof(decltype(_src));
         }
-        */
+        template<typename T>    // rvalue reference
+        inline __attribute__ ((always_inline)) void to_buffer(T&& _src)
+        {
+            memcpy(m_bufferPtr, &_src, sizeof(decltype(_src)));
+            m_bufferPtr += sizeof(decltype(_src));
+        }
+        
         /* Overloads for string types. */
         inline __attribute__ ((always_inline)) void to_buffer(const std::string& _src, size_t _n)
         {
             memcpy(m_bufferPtr, (char*)_src.c_str(), _n);
             m_bufferPtr += _n;
         }
+        inline __attribute__ ((always_inline)) void to_buffer(std::string&& _src, size_t _n)
+        {
+            memcpy(m_bufferPtr, (char*)_src.c_str(), _n);
+            m_bufferPtr += _n;
+        }
+
         inline __attribute__ ((always_inline)) void to_buffer(const char* _src, size_t _n)
         {
             memcpy(m_bufferPtr, (char*)_src, _n);
@@ -72,19 +83,34 @@ namespace Syn
         }
 
         /* Default copy, with auto deduced type and size. */
-        template<typename T>
+        template<typename T>    // as ptr
         inline __attribute__ ((always_inline)) void from_buffer(T* _dest)
         {
             memcpy(_dest, m_bufferPtr, sizeof(decltype(*_dest)));
             m_bufferPtr += sizeof(decltype(*_dest));
         }
+        template<typename T>    // as reference
+        inline __attribute__ ((always_inline)) void from_buffer(T& _dest)
+        {
+            memcpy(&_dest, m_bufferPtr, sizeof(decltype(_dest)));
+            m_bufferPtr += sizeof(decltype(_dest));
+        }
         /* Overloads for string types. */
-        inline __attribute__ ((always_inline)) void from_buffer(std::string* _dest, size_t _n)
+        inline __attribute__ ((always_inline)) void from_buffer(std::string* _dest, size_t _n)  // as ptr
         {
             char* str = new char[_n + 1];
             memset(str, 0, _n + 1);
             memcpy(str, m_bufferPtr, _n);
             *_dest = std::string(str);
+            delete[] str;
+            m_bufferPtr += _n;
+        }
+        inline __attribute__ ((always_inline)) void from_buffer(std::string& _dest, size_t _n)  // as reference
+        {
+            char* str = new char[_n + 1];
+            memset(str, 0, _n + 1);
+            memcpy(str, m_bufferPtr, _n);
+            _dest = std::string(str);
             delete[] str;
             m_bufferPtr += _n;
         }

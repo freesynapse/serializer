@@ -62,6 +62,7 @@ namespace BIOPAC
         int status_message_sz = status_message.size();
         int error_message_sz = error_message.size();
 
+        /*
         _serializer_ptr->to_buffer(&acq_filename_sz);
         _serializer_ptr->to_buffer(acq_filename, acq_filename_sz);
         _serializer_ptr->to_buffer(&save_filename_sz);
@@ -77,6 +78,22 @@ namespace BIOPAC
         _serializer_ptr->to_buffer(&mode);
         _serializer_ptr->to_buffer(&action);
         _serializer_ptr->to_buffer(&action_GUI);
+        */
+        _serializer_ptr->to_buffer(acq_filename_sz);
+        _serializer_ptr->to_buffer(acq_filename, acq_filename_sz);
+        _serializer_ptr->to_buffer(save_filename_sz);
+        _serializer_ptr->to_buffer(save_filename, save_filename_sz);
+        _serializer_ptr->to_buffer(load_filename_sz);
+        _serializer_ptr->to_buffer(load_filename, load_filename_sz);
+        _serializer_ptr->to_buffer(visibility_state);
+        _serializer_ptr->to_buffer(prev_visibility_state);
+        _serializer_ptr->to_buffer(status_message_sz);
+        _serializer_ptr->to_buffer(status_message, status_message_sz);
+        _serializer_ptr->to_buffer(error_message_sz);
+        _serializer_ptr->to_buffer(error_message, error_message_sz);
+        _serializer_ptr->to_buffer(mode);
+        _serializer_ptr->to_buffer(action);
+        _serializer_ptr->to_buffer(action_GUI);
         
         //return bytes;
     }
@@ -88,6 +105,7 @@ namespace BIOPAC
         
         printf("%s called.\n", __PRETTY_FUNCTION__);
 
+        /*
         _serializer_ptr->from_buffer(&acq_filename_sz);
         _serializer_ptr->from_buffer(&acq_filename, acq_filename_sz);
         _serializer_ptr->from_buffer(&save_filename_sz);
@@ -103,6 +121,23 @@ namespace BIOPAC
         _serializer_ptr->from_buffer(&(mode));
         _serializer_ptr->from_buffer(&(action));
         _serializer_ptr->from_buffer(&(action_GUI));
+        */
+        _serializer_ptr->from_buffer(acq_filename_sz);
+        _serializer_ptr->from_buffer(acq_filename, acq_filename_sz);
+        _serializer_ptr->from_buffer(save_filename_sz);
+        _serializer_ptr->from_buffer(save_filename, save_filename_sz);
+        _serializer_ptr->from_buffer(load_filename_sz);
+        _serializer_ptr->from_buffer(load_filename, load_filename_sz);
+        _serializer_ptr->from_buffer(visibility_state);
+        _serializer_ptr->from_buffer(prev_visibility_state);
+        _serializer_ptr->from_buffer(status_message_sz);
+        _serializer_ptr->from_buffer(status_message, status_message_sz);
+        _serializer_ptr->from_buffer(error_message_sz);
+        _serializer_ptr->from_buffer(error_message, error_message_sz);
+        _serializer_ptr->from_buffer((mode));
+        _serializer_ptr->from_buffer((action));
+        _serializer_ptr->from_buffer((action_GUI));
+
 
     }
 

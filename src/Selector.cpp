@@ -45,11 +45,11 @@ namespace BIOPAC
         for (const auto& s : s_selections)
         {
             // key
-            _serializer_ptr->to_buffer(&s.first);
+            _serializer_ptr->to_buffer(s.first);
             // now serialize the Selections
-            _serializer_ptr->to_buffer(&s.second.m_double);
-            _serializer_ptr->to_buffer(&s.second.m_vec.x);
-            _serializer_ptr->to_buffer(&s.second.m_vec.y);
+            _serializer_ptr->to_buffer(s.second.m_double);
+            _serializer_ptr->to_buffer(s.second.m_vec.x);
+            _serializer_ptr->to_buffer(s.second.m_vec.y);
         }
     }
     //
@@ -64,10 +64,10 @@ namespace BIOPAC
         {
             int key;
             Selection s;
-            _serializer_ptr->from_buffer(&key);
-            _serializer_ptr->from_buffer(&s.m_double);
-            _serializer_ptr->from_buffer(&s.m_vec.x);
-            _serializer_ptr->from_buffer(&s.m_vec.y);
+            _serializer_ptr->from_buffer(key);
+            _serializer_ptr->from_buffer(s.m_double);
+            _serializer_ptr->from_buffer(s.m_vec.x);
+            _serializer_ptr->from_buffer(s.m_vec.y);
 
             s_selections.insert(std::pair<int, Selection>(key, s));
         }
